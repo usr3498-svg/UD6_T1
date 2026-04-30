@@ -50,10 +50,9 @@ public class Reparacion {
     public String toString() {
         return "Reparacion{" +
                 "codigo=" + codigo +
-                ", cliente='" + cliente + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", urgente=" + urgente +
-                '}';
+                ", cliente='" + cliente +
+                ", descripcion='" + descripcion +
+                ", urgente=" + urgente + '}';
     }
 
     @Override

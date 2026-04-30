@@ -7,11 +7,11 @@ public class Reparacion {
     private String descripcion;
     private boolean urgente;
 
-    public Reparacion(int codigo, String cliente, String descripcion) {
+    public Reparacion(int codigo, String cliente, String descripcion, boolean urgente) {
         this.codigo = codigo;
         this.cliente = cliente;
         this.descripcion = descripcion;
-        this.urgente = false;
+        this.urgente = urgente;
     }
 
     public String getCliente() {

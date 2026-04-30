@@ -1,0 +1,4 @@
+Total juegos: 5
+Total horas: 287
+Media: 57.4
+Max: Videojuego{titulo='Minecraft, genero='Sandbox, horasJugadas=120}

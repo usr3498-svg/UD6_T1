@@ -10,6 +10,8 @@ import java.io.*;
 public class App {
     public static void main(String[] args) {
 
+        // ===================== REPARACIONES =====================
+
         Queue<Reparacion> cola = new LinkedList<>();
 
         cola.add(new Reparacion(1, "Ana", "Cambio de pantalla", false));
@@ -19,13 +21,9 @@ public class App {
         cola.add(new Reparacion(5, "Sergio", "Añadir disco duro", true));
 
         System.out.println("EJERCICIO DE REPARACIO");
-        System.out.println("________________________________________________________");
 
         System.out.println(cola);
-        System.out.println("________________________________________________________");
-
         System.out.println(cola.peek());
-        System.out.println("________________________________________________________");
 
         Stack<Reparacion> pila = new Stack<>();
 
@@ -33,16 +31,16 @@ public class App {
         pila.push(cola.poll());
 
         System.out.println(pila.peek());
-        System.out.println("________________________________________________________");
 
         pila.pop();
 
         System.out.println(cola.size());
-        System.out.println("________________________________________________________");
-
         System.out.println(cola.isEmpty());
 
         System.out.println("--------------------------------------------------------");
+
+        // ===================== CENTRO EDUCATIVO =====================
+
         System.out.println("EJERCICIO DE CENTRO EDUCATIVO");
 
         HashSet<Asistente> set = new HashSet<>();
@@ -51,6 +49,7 @@ public class App {
         set.add(new Asistente("87654321B", "Luis", "ASIR1"));
         set.add(new Asistente("31102301B", "Pedro", "DAM2"));
         set.add(new Asistente("11223344C", "Marta", "DAM1"));
+        set.add(new Asistente("20304821C", "Sergio", "DAM1"));
 
         System.out.println(set);
         System.out.println(set.size());
@@ -68,7 +67,11 @@ public class App {
 
         mapa.remove("ASIR1");
 
+        System.out.println(mapa.keySet());
+
         System.out.println("--------------------------------------------------------");
+
+        // ===================== VIDEOJUEGOS =====================
 
         System.out.println("EJERCICIO DE VIDEOJUEGOS");
 
@@ -77,15 +80,31 @@ public class App {
         try {
             BufferedReader br = new BufferedReader(new FileReader("videojuegos.csv"));
 
-            String linea;
+            String linea = br.readLine(); // saltar cabecera
+
             while ((linea = br.readLine()) != null) {
+
+                if (linea.trim().isEmpty()) continue;
+
                 String[] p = linea.split(",");
-                lista.add(new Videojuego(p[0], p[1], Integer.parseInt(p[2])));
+
+                lista.add(new Videojuego(
+                        p[0],
+                        p[1],
+                        Integer.parseInt(p[2].trim())
+                ));
             }
 
             br.close();
+
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        // evitar error si no hay datos
+        if (lista.isEmpty()) {
+            System.out.println("No hay datos en el fichero");
+            return;
         }
 
         int totalHoras = 0;
@@ -93,8 +112,10 @@ public class App {
 
         for (Videojuego v : lista) {
             totalHoras += v.getHorasJugadas();
-            if (v.getHorasJugadas() > max.getHorasJugadas())
+
+            if (v.getHorasJugadas() > max.getHorasJugadas()) {
                 max = v;
+            }
         }
 
         int totalJuegos = lista.size();
@@ -102,11 +123,14 @@ public class App {
 
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("resumen_videojuegos.txt"));
-            bw.write("Total juegos: " + totalJuegos);
-            bw.write("Total horas: " + totalHoras);
-            bw.write("Media: " + media);
-            bw.write("Max: " + max);
+
+            bw.write("Total juegos: " + totalJuegos + "\n");
+            bw.write("Total horas: " + totalHoras + "\n");
+            bw.write("Media: " + media + "\n");
+            bw.write("Max: " + max + "\n");
+
             bw.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
